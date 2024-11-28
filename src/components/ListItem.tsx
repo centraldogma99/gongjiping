@@ -1,5 +1,10 @@
 import dayjs from "dayjs"
-import { RightChevronSVG } from "../assets"
+import {
+  HumanIconBlueSVG,
+  HumanIconYellowSVG,
+  NotLoggedInSVG,
+  RightChevronSVG,
+} from "../assets"
 
 export interface ListItemProps {
   title: string
@@ -17,10 +22,14 @@ export const ListItem = ({
   notYetRead = false,
 }: ListItemProps) => {
   return (
-    <div className="flex gap-[11px] py-[36px] border-b border-[#E8EBED]">
-      <div className="flex items-center justify-center">
-        <div className="w-[52px] h-[52px] bg-red-500"></div>
-      </div>
+    <div className="flex gap-[11px] py-[36px] border-b border-[#E8EBED] items-center">
+      {
+        [
+          <HumanIconBlueSVG key="blue" />,
+          <HumanIconYellowSVG key="yellow" />,
+          <NotLoggedInSVG key="notLoggedIn" className="w-[52px] h-[52px]" />,
+        ][Math.floor(Math.random() * 3)]
+      }
       <div className="flex-1">
         <div className="text-[#2B2F34] text-xl font-bold leading-[150%] flex gap-[4px] mb-[3px]">
           <span>{title}</span>
