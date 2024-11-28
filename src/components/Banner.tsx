@@ -1,5 +1,5 @@
 import "swiper/css"
-import { Autoplay, Pagination } from "swiper/modules"
+import { Autoplay } from "swiper/modules"
 import { Swiper, SwiperSlide } from "swiper/react"
 import { Banner1PNG, Banner2PNG, Banner3PNG } from "../assets"
 
@@ -8,7 +8,7 @@ const BANNERS = [Banner1PNG, Banner2PNG, Banner3PNG]
 export const Banner = () => {
   return (
     <Swiper
-      modules={[Autoplay, Pagination]}
+      modules={[Autoplay]}
       autoplay={{ delay: 20000, disableOnInteraction: false }}
       loop={true}
     >
