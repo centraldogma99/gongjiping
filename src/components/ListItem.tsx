@@ -1,6 +1,6 @@
-import { RightChevron } from "../assets"
+import { RightChevronSVG } from "../assets"
 
-interface ListItemProps {
+export interface ListItemProps {
   title: string
   description?: string
   author: string
@@ -16,27 +16,27 @@ export const ListItem = ({
   notYetRead = false,
 }: ListItemProps) => {
   return (
-    <div className="flex gap-[11px] py-[36px] border-t border-[#E8EBED] first:border-t-0">
+    <div className="flex gap-[11px] py-[36px] border-t border-[#E8EBED]">
       <div className="flex items-center justify-center">
         <div className="w-[52px] h-[52px] bg-red-500"></div>
       </div>
       <div className="flex-1">
-        <div className="text-[#2B2F34] font-pretendard text-xl font-bold leading-[150%] flex gap-[4px]">
+        <div className="text-[#2B2F34] text-xl font-bold leading-[150%] flex gap-[4px] mb-[3px]">
           <span>{title}</span>
           {notYetRead && <NotYetReadSymbol />}
         </div>
-        <div className="text-[#788391] font-pretendard text-base font-medium leading-[150%]">
+        <div className="text-[#788391] text-base font-medium leading-[150%] mb-[2px]">
           {description}
         </div>
-        <div className="text-[#788391] font-pretendard text-sm font-semibold leading-[150%]">
+        <div className="text-[#788391] text-sm font-semibold leading-[150%]">
           {author} . {dueDate.toLocaleDateString()}까지
         </div>
       </div>
       <div className="flex items-center justify-center gap-[2px]">
-        <button className="text-[#237AF2] text-center font-pretendard text-base font-bold leading-[150%]">
+        <button className="text-[#237AF2] text-center text-base font-bold leading-[150%]">
           더 알아보기
         </button>
-        <RightChevron />
+        <RightChevronSVG />
       </div>
     </div>
   )
