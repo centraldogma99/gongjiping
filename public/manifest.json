@@ -2,12 +2,20 @@
   "manifest_version": 3,
   "version": "1.0.0",
   "short_name": "gongjiping",
-  "name": "공지핑",
-  "action": {
-    "default_popup": "index.html"
+  "name": "핑공지",
+  "chrome_url_overrides": {
+    "newtab": "./index.html"
   },
-  "start_url": ".",
-  "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "permissions": ["tabs"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_title": "Open New Tab",
+    "default_icon": {
+      "16": "./ping.png",
+      "24": "./ping.png",
+      "32": "./ping.png"
+    }
+  }
 }
