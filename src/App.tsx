@@ -1,6 +1,7 @@
 import { Banner } from "./components/Banner"
 import { CalendarSection } from "./components/CalendarSection"
 import { NoticeList, SortType } from "./components/NoticeList"
+import { TopBar } from "./components/TopBar"
 
 export const snackMockData = [
   {
@@ -92,6 +93,7 @@ export const snackMockData = [
 function App() {
   return (
     <div>
+      <TopBar />
       <Banner />
       <div className="flex flex-row gap-[20px] max-w-[1299px] mx-auto">
         <CalendarSection className="px-[50px] border-r border-[#E8EBED] pt-[54px]" />

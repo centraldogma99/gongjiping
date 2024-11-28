@@ -16,17 +16,6 @@ export const NoticeList = ({
 }) => {
   const [content, setContent] = useState<ListItemProps[]>([])
 
-  const handleLogin = () => {
-    if (window.gapi.client.getToken() === null) {
-      // Prompt the user to select a Google Account and ask for consent to share their data
-      // when establishing a new session.
-      window.tokenClient.requestAccessToken({ prompt: "consent" })
-    } else {
-      // Skip display of account chooser and consent dialog for an existing session.
-      window.tokenClient.requestAccessToken({ prompt: "" })
-    }
-  }
-
   const handleLoad = async () => {
     let response
     try {
@@ -58,7 +47,6 @@ export const NoticeList = ({
 
   return (
     <div className={className}>
-      <button onClick={handleLogin}>로그인</button>
       <button onClick={handleLoad}>로드</button>
       <div className="flex gap-[10px] items-center justify-between">
         <div className="flex items-center">
