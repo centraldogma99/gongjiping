@@ -9,13 +9,15 @@ export enum SortType {
 export const NoticeList = ({
   items,
   sortType,
+  className,
 }: {
   items: ListItemProps[]
   sortType: SortType
+  className?: string
 }) => {
   console.log(sortType)
   return (
-    <div>
+    <div className={className}>
       <div className="flex gap-[10px] items-center justify-between">
         <div className="flex items-center">
           <PoliceLightSVG />
