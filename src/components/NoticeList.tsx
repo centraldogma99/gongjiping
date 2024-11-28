@@ -56,8 +56,6 @@ export const NoticeList = ({
     )
   }
 
-  console.log(content)
-
   return (
     <div className={className}>
       <button onClick={handleLogin}>로그인</button>

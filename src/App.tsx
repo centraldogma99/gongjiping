@@ -93,11 +93,11 @@ function App() {
   return (
     <div>
       <Banner />
-      <div className="flex flex-row gap-[20px]">
+      <div className="flex flex-row gap-[20px] max-w-[1299px] mx-auto">
         <CalendarSection className="px-[50px] border-r border-[#E8EBED] pt-[54px]" />
         <NoticeList
           sortType={SortType.Latest}
-          className="pt-[54px] px-[50px]"
+          className="pt-[54px] px-[50px] min-w-[875px]"
         />
       </div>
     </div>
