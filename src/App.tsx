@@ -2,38 +2,6 @@ import { Banner } from "./components/Banner"
 import { CalendarSection } from "./components/CalendarSection"
 import { NoticeList, SortType } from "./components/NoticeList"
 
-const noticeMockData = [
-  {
-    title: "법정교육 수강 안내",
-    description:
-      "근로자라면 매년 필수로 수강해야 하는 모든 과목을 100% 수료 부탁드립니다.",
-    author: "김한솔",
-    dueDate: new Date(),
-  },
-  {
-    title: "법정교육 수강 안내",
-    description:
-      "근로자라면 매년 필수로 수강해야 하는 모든 과목을 100% 수료 부탁드립니다.",
-    author: "김한솔",
-    dueDate: new Date(),
-    notYetRead: true,
-  },
-  {
-    title: "법정교육 수강 안내",
-    description:
-      "근로자라면 매년 필수로 수강해야 하는 모든 과목을 100% 수료 부탁드립니다.",
-    author: "김한솔",
-    dueDate: new Date(),
-  },
-  {
-    title: "법정교육 수강 안내",
-    description:
-      "근로자라면 매년 필수로 수강해야 하는 모든 과목을 100% 수료 부탁드립니다.",
-    author: "김한솔",
-    dueDate: new Date(),
-  },
-]
-
 export const snackMockData = [
   {
     date: new Date("2024-11-29"),
@@ -128,7 +96,6 @@ function App() {
       <div className="flex flex-row gap-[20px]">
         <CalendarSection className="px-[50px] border-r border-[#E8EBED] pt-[54px]" />
         <NoticeList
-          items={noticeMockData}
           sortType={SortType.Latest}
           className="pt-[54px] px-[50px]"
         />
