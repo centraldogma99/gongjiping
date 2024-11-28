@@ -17,7 +17,7 @@ export const ListItem = ({
   notYetRead = false,
 }: ListItemProps) => {
   return (
-    <div className="flex gap-[11px] py-[36px] border-t border-[#E8EBED]">
+    <div className="flex gap-[11px] py-[36px] border-b border-[#E8EBED]">
       <div className="flex items-center justify-center">
         <div className="w-[52px] h-[52px] bg-red-500"></div>
       </div>

@@ -7,10 +7,13 @@ export enum SortType {
   Deadline = "deadline",
 }
 
-export const NoticeList = ({ className }: { className?: string }) => {
-  const [content, setContent] = useState<
-    (ListItemProps & { writtenDate: Date })[]
-  >([])
+export const NoticeList = ({
+  className,
+  content,
+}: {
+  className?: string
+  content: (ListItemProps & { writtenDate: Date })[]
+}) => {
   const [sortType, setSortType] = useState<SortType>(SortType.Latest)
 
   const sortedContent = useMemo(() => {
@@ -23,39 +26,8 @@ export const NoticeList = ({ className }: { className?: string }) => {
     })
   }, [content, sortType])
 
-  const handleLoad = async () => {
-    let response
-    try {
-      // Fetch first 10 files
-      response = await window.gapi.client.sheets.spreadsheets.values.get({
-        spreadsheetId: "1LaGrCPE93LoZUpfD9_Y4HP9AhvPMdwTc9AEeNWxHle0",
-        range: "A2:F",
-      })
-    } catch (err) {
-      console.log(err)
-      return
-    }
-    const range = response.result
-    if (!range || !range.values || range.values.length == 0) {
-      console.log("No values found.")
-      return
-    }
-    setContent(
-      (range.values as string[][]).map((item) => {
-        return {
-          title: item[0],
-          dueDate: new Date(item[1]),
-          description: item[2],
-          author: item[4],
-          writtenDate: new Date(item[5]),
-        }
-      })
-    )
-  }
-
   return (
     <div className={className}>
-      <button onClick={handleLoad}>로드</button>
       <div className="flex gap-[10px] items-center justify-between">
         <div className="flex items-center">
           <PoliceLightSVG />

@@ -1,15 +1,17 @@
-import { useState } from "react"
 import {
   FakeProfilePNG,
   NotLoggedInSVG,
   SearchInputPNG,
   SZSLogoSVG,
 } from "../assets"
-import { googleLogin } from "../utils/googleLogin"
 
-export const TopBar = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
-
+export const TopBar = ({
+  isLoggedIn,
+  onLogin,
+}: {
+  isLoggedIn: boolean
+  onLogin: () => void
+}) => {
   return (
     <div className="h-[84px] bg-white flex items-center justify-between px-[50px]">
       <SZSLogoSVG />
@@ -23,10 +25,7 @@ export const TopBar = () => {
         {!isLoggedIn ? (
           <NotLoggedInSVG
             className="ml-[24px] cursor-pointer"
-            onClick={() => {
-              googleLogin()
-              setIsLoggedIn(true)
-            }}
+            onClick={onLogin}
           />
         ) : (
           <div className="flex items-center w-[48px] h-[48px] rounded overflow-hidden">

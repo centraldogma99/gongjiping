@@ -1,7 +1,11 @@
+import { useState } from "react"
 import { Banner } from "./components/Banner"
 import { CalendarSection } from "./components/CalendarSection"
 import { NoticeList } from "./components/NoticeList"
 import { TopBar } from "./components/TopBar"
+import { NotLoggedIn } from "./components/NotLoggedIn"
+import type { ListItemProps } from "./components/ListItem"
+import { googleLogin } from "./utils/google"
 
 export const snackMockData = [
   {
@@ -91,13 +95,40 @@ export const snackMockData = [
 ] as const
 
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const [noticeList, setNoticeList] = useState<
+    (ListItemProps & { writtenDate: Date })[]
+  >([])
+
+  const handleLogin = () =>
+    googleLogin((data) => {
+      setIsLoggedIn(true)
+      setNoticeList(data)
+    })
   return (
     <div>
-      <TopBar />
+      <TopBar isLoggedIn={isLoggedIn} onLogin={handleLogin} />
       <Banner />
-      <div className="flex flex-row gap-[20px] max-w-[1299px] mx-auto">
-        <CalendarSection className="px-[50px] border-r border-[#E8EBED] pt-[54px]" />
-        <NoticeList className="pt-[54px] px-[50px] min-w-[875px]" />
+
+      <div className="flex flex-row gap-[20px] max-w-[1299px] mx-auto justify-center">
+        {isLoggedIn ? (
+          <>
+            <CalendarSection className="px-[50px] border-r border-[#E8EBED] pt-[54px]" />
+            <NoticeList
+              className="pt-[54px] px-[50px] min-w-[875px]"
+              content={noticeList}
+            />
+          </>
+        ) : (
+          <NotLoggedIn
+            onLogin={() =>
+              googleLogin((data) => {
+                setIsLoggedIn(true)
+                setNoticeList(data)
+              })
+            }
+          />
+        )}
       </div>
     </div>
   )
