@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useMemo, useState } from "react"
 import { PoliceLightSVG } from "../assets"
 import { ListItem, ListItemProps } from "./ListItem"
 
@@ -7,14 +7,21 @@ export enum SortType {
   Deadline = "deadline",
 }
 
-export const NoticeList = ({
-  sortType,
-  className,
-}: {
-  sortType: SortType
-  className?: string
-}) => {
-  const [content, setContent] = useState<ListItemProps[]>([])
+export const NoticeList = ({ className }: { className?: string }) => {
+  const [content, setContent] = useState<
+    (ListItemProps & { writtenDate: Date })[]
+  >([])
+  const [sortType, setSortType] = useState<SortType>(SortType.Latest)
+
+  const sortedContent = useMemo(() => {
+    return content.sort((a, b) => {
+      return sortType === SortType.Latest
+        ? a.writtenDate.getTime() - b.writtenDate.getTime()
+        : !a.dueDate && !b.dueDate
+        ? a.writtenDate.getTime() - b.writtenDate.getTime()
+        : (a.dueDate?.getTime() ?? 0) - (b.dueDate?.getTime() ?? 0)
+    })
+  }, [content, sortType])
 
   const handleLoad = async () => {
     let response
@@ -22,7 +29,7 @@ export const NoticeList = ({
       // Fetch first 10 files
       response = await window.gapi.client.sheets.spreadsheets.values.get({
         spreadsheetId: "1LaGrCPE93LoZUpfD9_Y4HP9AhvPMdwTc9AEeNWxHle0",
-        range: "A2:E",
+        range: "A2:F",
       })
     } catch (err) {
       console.log(err)
@@ -40,6 +47,7 @@ export const NoticeList = ({
           dueDate: new Date(item[1]),
           description: item[2],
           author: item[4],
+          writtenDate: new Date(item[5]),
         }
       })
     )
@@ -63,6 +71,7 @@ export const NoticeList = ({
             className={`mr-[18px] text-base font-semibold leading-[150%] ${
               sortType === SortType.Latest ? "text-[#2B2F34]" : "text-[#B9C0C6]"
             }`}
+            onClick={() => setSortType(SortType.Latest)}
           >
             최신순
           </button>
@@ -73,12 +82,13 @@ export const NoticeList = ({
                 ? "text-[#2B2F34]"
                 : "text-[#B9C0C6]"
             }`}
+            onClick={() => setSortType(SortType.Deadline)}
           >
             마감순
           </button>
         </div>
       </div>
-      {content?.map((item, i) => (
+      {sortedContent?.map((item, i) => (
         <ListItem {...item} key={i} />
       ))}
     </div>
