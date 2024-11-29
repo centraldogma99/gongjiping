@@ -49,7 +49,7 @@ export const Calendar = ({
     <div>
       <div className="flex items-center gap-[8px]">
         <FoodSVG />
-        <span className="text-[#141618] text-[28px] font-bold leading-[150%]">
+        <span className="text-[#141618] text-[22px] font-bold leading-[150%]">
           오늘의 메뉴
         </span>
       </div>

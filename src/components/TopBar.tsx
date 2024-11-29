@@ -28,7 +28,7 @@ export const TopBar = ({
             onClick={onLogin}
           />
         ) : (
-          <div className="flex items-center w-[48px] h-[48px] rounded overflow-hidden">
+          <div className="ml-[24px] flex items-center w-[48px] h-[48px] rounded-xl overflow-hidden">
             <img src={FakeProfilePNG} alt="logged in" />
           </div>
         )}

@@ -1,7 +1,9 @@
 import { useMemo, useState } from "react"
 import { PoliceLightSVG, RefreshSVG } from "../assets"
 import { ListItem, ListItemProps } from "./ListItem"
-import { isDateExpired } from "../utils/date"
+import { isDateExpired, resetTimeToMidnight } from "../utils/date"
+import { EmptyNotice } from "./EmptyNotice"
+import dayjs from "dayjs"
 
 export enum SortType {
   Latest = "latest",
@@ -38,12 +40,20 @@ export const NoticeList = ({
     })
   }, [content, sortType])
 
+  if (content.length === 0) {
+    return (
+      <div className={`${className} flex-1`}>
+        <EmptyNotice />
+      </div>
+    )
+  }
+
   return (
     <div className={className}>
       <div className="flex gap-[10px] items-center justify-between">
         <div className="flex items-center">
           <PoliceLightSVG />
-          <span className="ml-[8px] leading-[150%] font-bold text-[28px]">
+          <span className="ml-[8px] leading-[150%] font-bold text-[20px]">
             주요 공지
           </span>
           <span className="ml-[10px] text-[#49515A] text-base font-semibold leading-[150%]">
@@ -76,9 +86,15 @@ export const NoticeList = ({
           </button>
         </div>
       </div>
-      {sortedContent?.map((item, i) => (
-        <ListItem {...item} key={i} />
-      ))}
+      {sortedContent
+        ?.filter(
+          (data) =>
+            dayjs(data.dueDate).diff(resetTimeToMidnight(new Date()), "day") >=
+            -2
+        )
+        ?.map((item, i) => (
+          <ListItem {...item} key={i} />
+        ))}
     </div>
   )
 }

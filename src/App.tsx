@@ -6,6 +6,8 @@ import { TopBar } from "./components/TopBar"
 import { NotLoggedIn } from "./components/NotLoggedIn"
 import type { ListItemProps } from "./components/ListItem"
 import { googleLogin, loadNoticeList } from "./utils/google"
+import { resetTimeToMidnight } from "./utils/date"
+import dayjs from "dayjs"
 
 export const snackMockData = [
   {
@@ -117,11 +119,10 @@ function App() {
           <>
             <CalendarSection className="px-[50px] border-r border-[#E8EBED] pt-[54px]" />
             <NoticeList
-              className="pt-[54px] px-[50px] max-w-[875px]"
+              className="pt-[54px] px-[50px] max-w-[875px] min-w-[700px]"
               content={noticeList}
               onRefresh={async () => {
                 const data = await loadNoticeList()
-                console.log(data)
                 if (data) setNoticeList(data)
               }}
             />

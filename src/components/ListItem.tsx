@@ -5,7 +5,7 @@ import {
   NotLoggedInSVG,
   RightChevronSVG,
 } from "../assets"
-import { isDateExpired } from "../utils/date"
+import { isDateExpired, resetTimeToMidnight } from "../utils/date"
 
 export interface ListItemProps {
   title: string
@@ -22,6 +22,8 @@ export const ListItem = ({
   dueDate,
   notYetRead = false,
 }: ListItemProps) => {
+  const diff = dayjs(dueDate).diff(resetTimeToMidnight(new Date()), "day")
+
   return (
     <div className="flex gap-[11px] py-[36px] border-b border-[#E8EBED] items-center">
       {
@@ -40,19 +42,27 @@ export const ListItem = ({
           {description}
         </div>
         <div className="text-[#788391] text-sm font-semibold leading-[150%]">
-          <span>{author}</span>
-          <span
-            className={
-              dueDate &&
-              !isDateExpired(dueDate) &&
-              dayjs(dueDate).diff(dayjs(), "day") <= 3
-                ? "text-[#FF0000]"
-                : ""
-            }
-          >
-            {dueDate &&
-              " · " + dayjs(dueDate).format("YYYY. M. D (dd)") + "까지"}
+          <span className="gap-[10px] px-[6px] py-[2px] rounded-full bg-[#F5F6F8] w-fit">
+            {author}
           </span>
+          {dueDate && (
+            <span
+              className={
+                dueDate && !isDateExpired(dueDate) && diff <= 3
+                  ? "text-[#DF4532]"
+                  : ""
+              }
+            >
+              {" · " +
+                dayjs(dueDate).format("YYYY. M. D (dd)") +
+                ", " +
+                (diff === 0
+                  ? "D-DAY"
+                  : isDateExpired(dueDate)
+                  ? "종료"
+                  : "D-" + Math.abs(diff))}
+            </span>
+          )}
         </div>
       </div>
       <div className="flex items-center justify-center gap-[2px]">

@@ -31,8 +31,7 @@ export const loadNoticeList = async () => {
   }
   const range = response.result
   if (!range || !range.values || range.values.length == 0) {
-    console.log("No values found.")
-    return
+    return []
   }
   return (range.values as string[][]).map((item) => {
     return {
