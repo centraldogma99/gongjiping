@@ -10,10 +10,10 @@ export const Banner = () => {
     <Swiper
       modules={[Autoplay]}
       autoplay={{ delay: 20000, disableOnInteraction: false }}
-      loop={true}
+      loop
     >
       {BANNERS.map((banner, i) => (
-        <SwiperSlide key={i}>
+        <SwiperSlide key={i} className="flex items-center justify-center">
           <img src={banner} alt="banner" />
         </SwiperSlide>
       ))}

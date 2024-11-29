@@ -106,12 +106,14 @@ function App() {
       setNoticeList(data)
     })
   return (
-    <div>
+    <div className="flex flex-col min-h-screen">
       <TopBar isLoggedIn={isLoggedIn} onLogin={handleLogin} />
-      <Banner />
+      <div>
+        <Banner />
+      </div>
 
-      <div className="flex flex-row gap-[20px] max-w-[1299px] mx-auto justify-center">
-        {isLoggedIn ? (
+      {isLoggedIn ? (
+        <div className="flex flex-row gap-[20px] max-w-[1299px] mx-auto justify-center">
           <>
             <CalendarSection className="px-[50px] border-r border-[#E8EBED] pt-[54px]" />
             <NoticeList
@@ -119,17 +121,10 @@ function App() {
               content={noticeList}
             />
           </>
-        ) : (
-          <NotLoggedIn
-            onLogin={() =>
-              googleLogin((data) => {
-                setIsLoggedIn(true)
-                setNoticeList(data)
-              })
-            }
-          />
-        )}
-      </div>
+        </div>
+      ) : (
+        <NotLoggedIn onLogin={handleLogin} className="flex-1" />
+      )}
     </div>
   )
 }

@@ -1,13 +1,14 @@
 import { GoogleLogoPNG, NeedLoginPNG } from "../assets"
-import { googleLogin } from "../utils/google"
 
 export const NotLoggedIn = ({
   onLogin,
+  className,
 }: {
-  onLogin: (isLoggedIn: boolean) => void
+  onLogin: () => void
+  className?: string
 }) => {
   return (
-    <div className="flex flex-col items-center justify-center h-full mt-[260px]">
+    <div className={`flex flex-col items-center justify-center ${className}`}>
       <img
         src={NeedLoginPNG}
         alt="need login"
@@ -15,10 +16,7 @@ export const NotLoggedIn = ({
       />
       <button
         className="rounded-2xl border border-[#DADEE3] bg-white flex items-center justify-center gap-[4px] p-[16px] w-[253px]"
-        onClick={() => {
-          googleLogin()
-          onLogin(true)
-        }}
+        onClick={onLogin}
       >
         <img
           src={GoogleLogoPNG}
