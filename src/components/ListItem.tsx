@@ -25,7 +25,7 @@ export const ListItem = ({
   const diff = dayjs(dueDate).diff(resetTimeToMidnight(new Date()), "day")
 
   return (
-    <div className="flex gap-[11px] py-[36px] border-b border-[#E8EBED] items-center">
+    <div className="flex gap-[12px] py-[36px] border-b border-[#E8EBED] items-center">
       {
         [
           <HumanIconBlueSVG key="blue" />,
