@@ -9,7 +9,7 @@ export const Banner = () => {
   return (
     <Swiper
       modules={[Autoplay]}
-      autoplay={{ delay: 20000, disableOnInteraction: false }}
+      autoplay={{ delay: 8500, disableOnInteraction: false }}
       loop
     >
       {BANNERS.map((banner, i) => (
