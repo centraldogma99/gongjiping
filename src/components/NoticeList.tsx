@@ -40,10 +40,20 @@ export const NoticeList = ({
     })
   }, [content, sortType])
 
-  if (content.length === 0) {
+  const filteredContent = useMemo(
+    () =>
+      sortedContent?.filter(
+        (data) =>
+          dayjs(data.dueDate).diff(resetTimeToMidnight(new Date()), "day") >=
+          -2,
+        []
+      ) ?? [],
+    [sortedContent]
+  )
+  if (filteredContent.length === 0) {
     return (
       <div className={`${className} flex-1`}>
-        <EmptyNotice />
+        <EmptyNotice onRefresh={onRefresh} />
       </div>
     )
   }
@@ -57,7 +67,7 @@ export const NoticeList = ({
             주요 공지
           </span>
           <span className="ml-[10px] text-[#788391] text-base font-semibold leading-[150%]">
-            총 {content.length}건
+            총 {filteredContent.length}건
           </span>
           <RefreshSVG
             onClick={onRefresh}
@@ -86,15 +96,9 @@ export const NoticeList = ({
           </button>
         </div>
       </div>
-      {sortedContent
-        ?.filter(
-          (data) =>
-            dayjs(data.dueDate).diff(resetTimeToMidnight(new Date()), "day") >=
-            -2
-        )
-        ?.map((item, i) => (
-          <ListItem {...item} key={i} />
-        ))}
+      {filteredContent.map((item, i) => (
+        <ListItem {...item} key={i} />
+      ))}
     </div>
   )
 }

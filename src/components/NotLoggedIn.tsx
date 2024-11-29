@@ -15,7 +15,7 @@ export const NotLoggedIn = ({
         className="w-[201px] h-[119px] mb-[27px]"
       />
       <button
-        className="rounded-2xl border border-[#DADEE3] bg-white flex items-center justify-center gap-[4px] p-[16px] w-[253px]"
+        className="rounded-2xl border border-[#DADEE3] bg-white flex items-center justify-center gap-[8px] p-[16px] w-[253px]"
         onClick={onLogin}
       >
         <img
