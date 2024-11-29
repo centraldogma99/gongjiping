@@ -56,7 +56,7 @@ export const NoticeList = ({
           <span className="ml-[8px] leading-[150%] font-bold text-[20px]">
             주요 공지
           </span>
-          <span className="ml-[10px] text-[#49515A] text-base font-semibold leading-[150%]">
+          <span className="ml-[10px] text-[#606A76] text-base font-semibold leading-[150%]">
             총 {content.length}건
           </span>
           <RefreshSVG

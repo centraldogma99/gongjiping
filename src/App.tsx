@@ -6,8 +6,6 @@ import { TopBar } from "./components/TopBar"
 import { NotLoggedIn } from "./components/NotLoggedIn"
 import type { ListItemProps } from "./components/ListItem"
 import { googleLogin, loadNoticeList } from "./utils/google"
-import { resetTimeToMidnight } from "./utils/date"
-import dayjs from "dayjs"
 
 export const snackMockData = [
   {
