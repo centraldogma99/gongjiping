@@ -117,7 +117,7 @@ function App() {
           <>
             <CalendarSection className="px-[50px] border-r border-[#E8EBED] pt-[54px]" />
             <NoticeList
-              className="pt-[54px] px-[50px] min-w-[875px]"
+              className="pt-[54px] px-[50px] max-w-[875px]"
               content={noticeList}
             />
           </>
