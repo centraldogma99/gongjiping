@@ -65,7 +65,7 @@ export const ListItem = ({
           )}
         </div>
       </div>
-      <div className="flex items-center justify-center gap-[2px]">
+      <div className="flex items-center justify-center gap-[2px] ml-[70px]">
         <button className="text-[#237AF2] text-center text-base font-bold leading-[150%]">
           더 알아보기
         </button>
