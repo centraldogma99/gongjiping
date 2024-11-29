@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react"
 import { PoliceLightSVG, RefreshSVG } from "../assets"
 import { ListItem, ListItemProps } from "./ListItem"
+import { isDateExpired } from "../utils/date"
 
 export enum SortType {
   Latest = "latest",
@@ -20,9 +21,20 @@ export const NoticeList = ({
 
   const sortedContent = useMemo(() => {
     return content.sort((a, b) => {
-      return sortType === SortType.Latest || (!a.dueDate && !b.dueDate)
-        ? b.writtenDate.getTime() - a.writtenDate.getTime()
-        : (a.dueDate?.getTime() ?? 0) - (b.dueDate?.getTime() ?? 0)
+      if (sortType === SortType.Latest) {
+        return b.writtenDate.getTime() - a.writtenDate.getTime()
+      }
+
+      const aExpired = !a.dueDate || isDateExpired(a.dueDate)
+      const bExpired = !b.dueDate || isDateExpired(b.dueDate)
+
+      if (aExpired && bExpired) {
+        return b.writtenDate.getTime() - a.writtenDate.getTime()
+      }
+      if (aExpired) return 1
+      if (bExpired) return -1
+
+      return a.dueDate!.getTime() - b.dueDate!.getTime()
     })
   }, [content, sortType])
 
