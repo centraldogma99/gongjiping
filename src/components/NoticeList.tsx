@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react"
-import { PoliceLightSVG } from "../assets"
+import { PoliceLightSVG, RefreshSVG } from "../assets"
 import { ListItem, ListItemProps } from "./ListItem"
 
 export enum SortType {
@@ -10,18 +10,18 @@ export enum SortType {
 export const NoticeList = ({
   className,
   content,
+  onRefresh,
 }: {
   className?: string
   content: (ListItemProps & { writtenDate: Date })[]
+  onRefresh: () => void
 }) => {
   const [sortType, setSortType] = useState<SortType>(SortType.Latest)
 
   const sortedContent = useMemo(() => {
     return content.sort((a, b) => {
-      return sortType === SortType.Latest
-        ? a.writtenDate.getTime() - b.writtenDate.getTime()
-        : !a.dueDate && !b.dueDate
-        ? a.writtenDate.getTime() - b.writtenDate.getTime()
+      return sortType === SortType.Latest || (!a.dueDate && !b.dueDate)
+        ? b.writtenDate.getTime() - a.writtenDate.getTime()
         : (a.dueDate?.getTime() ?? 0) - (b.dueDate?.getTime() ?? 0)
     })
   }, [content, sortType])
@@ -37,6 +37,10 @@ export const NoticeList = ({
           <span className="ml-[10px] text-[#49515A] text-base font-semibold leading-[150%]">
             총 {content.length}건
           </span>
+          <RefreshSVG
+            onClick={onRefresh}
+            className="cursor-pointer h-[20px] w-[20px] ml-[10px]"
+          />
         </div>
         <div className="flex items-center">
           <button

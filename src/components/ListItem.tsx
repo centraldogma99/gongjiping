@@ -39,8 +39,9 @@ export const ListItem = ({
           {description}
         </div>
         <div className="text-[#788391] text-sm font-semibold leading-[150%]">
-          {author} .{" "}
-          {dueDate && dayjs(dueDate).format("YYYY. MM. DD (dd)") + "까지"}
+          {author}
+          {dueDate &&
+            " · " + dayjs(dueDate).format("YYYY. MM. DD (dd)") + "까지"}
         </div>
       </div>
       <div className="flex items-center justify-center gap-[2px]">

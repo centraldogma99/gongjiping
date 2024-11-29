@@ -5,7 +5,7 @@ import { NoticeList } from "./components/NoticeList"
 import { TopBar } from "./components/TopBar"
 import { NotLoggedIn } from "./components/NotLoggedIn"
 import type { ListItemProps } from "./components/ListItem"
-import { googleLogin } from "./utils/google"
+import { googleLogin, loadNoticeList } from "./utils/google"
 
 export const snackMockData = [
   {
@@ -119,6 +119,11 @@ function App() {
             <NoticeList
               className="pt-[54px] px-[50px] max-w-[875px]"
               content={noticeList}
+              onRefresh={async () => {
+                const data = await loadNoticeList()
+                console.log(data)
+                if (data) setNoticeList(data)
+              }}
             />
           </>
         </div>

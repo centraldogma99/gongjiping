@@ -37,7 +37,7 @@ export const loadNoticeList = async () => {
   return (range.values as string[][]).map((item) => {
     return {
       title: item[0],
-      dueDate: new Date(item[1]),
+      dueDate: item[1] ? new Date(item[1]) : undefined,
       description: item[2],
       author: item[4],
       writtenDate: new Date(item[5]),
